@@ -4,3 +4,4 @@ from django.db import models
 #Can change
 class User(models.Model):
     name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
