@@ -7,8 +7,8 @@ class Review(models.Model):
     title = models.CharField(max_length=100, null=False)
     score = models.IntegerField(
         validators=[
-            MaxValueValidator(100),
-            MinValueValidator(1)
+            MaxValueValidator(5),
+            MinValueValidator(0)
         ],
         null=False
     )

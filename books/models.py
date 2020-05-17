@@ -15,8 +15,7 @@ class Book(models.Model):
         related_name='books_published',
         on_delete=models.SET('NO PUBLISHER')
     )
-    tags = models.ForeignKey(
+    tags = models.ManyToManyField(
         'tags.Tag',
-        related_name='tags_marked',
-        on_delete=models.SET_NULL
+        related_name='books'
     )
