@@ -4,7 +4,8 @@ from authors.models import Author
 
 from books.serializers import BooksSerializer
 
-class Serializer(serializers.ModelSerializer):
+
+class AuthorSerializer(serializers.ModelSerializer):
     has_account = serializers.SerializerMethodField()
     books_written = BooksSerializer(many=True)
 
