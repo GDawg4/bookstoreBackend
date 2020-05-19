@@ -17,5 +17,6 @@ class Book(models.Model):
     )
     tags = models.ManyToManyField(
         'tags.Tag',
-        related_name='books'
+        related_name='books',
+        null = True
     )

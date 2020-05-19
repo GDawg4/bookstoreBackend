@@ -20,5 +20,6 @@ class Review(models.Model):
     book = models.ForeignKey(
         'books.Book',
         related_name='reviews_starred',
-        on_delete=models.SET('DELETED')
+        on_delete=models.SET('NO BOOK AVAILABLE'),
+        default=0
     )

@@ -30,4 +30,5 @@ router.register(r'user', UserViewSet)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^api/v1/', include(router.urls))
 ]

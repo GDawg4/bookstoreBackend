@@ -2,12 +2,10 @@ from rest_framework import serializers
 
 from authors.models import Author
 
-from books.serializers import BooksSerializer
-
 
 class AuthorSerializer(serializers.ModelSerializer):
     has_account = serializers.SerializerMethodField()
-    books_written = BooksSerializer(many=True)
+    books_written = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
 
     class Meta:
         model = Author
