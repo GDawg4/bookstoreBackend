@@ -5,7 +5,7 @@ class Transaction(models.Model):
     transaction_id = models.CharField(max_length=16)
     total = models.FloatField()
     buyer = models.ForeignKey(
-        'users.User',
+        'users.Reader',
         on_delete=models.CASCADE,
         related_name='purchases',
     )

@@ -5,7 +5,7 @@ class Note(models.Model):
     title = models.CharField(max_length=10000, null=False)
     content = models.CharField(max_length=1000, null=False)
     user = models.ForeignKey(
-        'users.User',
+        'users.Reader',
         related_name='notes_written',
         null=False,
         on_delete=models.CASCADE

@@ -1,17 +1,27 @@
+
 from rest_framework import serializers
-#     serializers.StringRelatedField(many=True)
-from users.models import User
-from transactions.serializers import TransactionSerializer
 
-class UserSerializer(serializers.ModelSerializer):
-    transactions = TransactionSerializer(many=True)
-    reviews_written = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+from users.models import Reader
 
+
+class ReaderSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
+        model = Reader
         fields = (
+            'id',
             'name',
-            'last_name',
-            'transactions',
-            'reviews_written'
+            'lastname',
+            'email',
+            'password',
+            'age'
         )
+        extra_kwargs = {
+            'password': {'write_only': True},
+        }
+
+    def save(self):
+        reader = Reader(email=self.validated_data['email'])
+        password = self.validated_data['password']
+        reader.set_password(password)
+        reader.save()
+        return reader

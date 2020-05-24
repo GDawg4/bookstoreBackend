@@ -6,7 +6,7 @@ class Author(models.Model):
     birth_date = models.DateField()
     has_account = models.BooleanField(default=False)
     account_linked = models.OneToOneField(
-        'users.User',
+        'users.Reader',
         on_delete=models.SET_NULL,
         null=True
     )

@@ -6,14 +6,12 @@ from books.serializers import BooksSerializer
 
 
 class NoteSerializer(serializers.ModelSerializer):
-    book = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
-
     class Meta:
         model = Note
         fields = (
             'id',
             'title',
-            'notes',
+            'content',
             'user',
             'book'
         )

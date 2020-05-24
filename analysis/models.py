@@ -10,7 +10,7 @@ class Analysis(models.Model):
         on_delete=models.CASCADE
     )
     writer = models.ForeignKey(
-        'users.User',
+        'users.Reader',
         related_name='analysis_written',
         on_delete=models.SET_NULL,
         null=True

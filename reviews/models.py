@@ -13,7 +13,7 @@ class Review(models.Model):
         null=False
     )
     reviewer = models.ForeignKey(
-        'users.User',
+        'users.Reader',
         related_name='reviews_written',
         on_delete=models.SET('NO AUTHOR')
     )
