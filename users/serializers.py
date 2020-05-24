@@ -13,14 +13,20 @@ class ReaderSerializer(serializers.ModelSerializer):
             'lastname',
             'email',
             'password',
-            'age'
+            'age',
+            'username'
         )
         extra_kwargs = {
             'password': {'write_only': True},
         }
 
     def save(self):
-        reader = Reader(email=self.validated_data['email'])
+        print(self.data)
+        reader = Reader(email=self.validated_data['email'],
+                        name=self.validated_data['name'],
+                        lastname=self.validated_data['lastname'],
+                        username=self.validated_data['username'],
+                        age=self.validated_data['age'])
         password = self.validated_data['password']
         reader.set_password(password)
         reader.save()
