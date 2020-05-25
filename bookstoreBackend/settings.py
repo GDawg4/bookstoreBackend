@@ -27,7 +27,7 @@ SECRET_KEY = 'm7&gw@_d%k4@d14_%v0cyfcas!_h)t&p075gd=mwbjod^ki-ws'
 DEBUG = True
 
 #ALLOWED_HOSTS = ['192.168.1.10']
-ALLOWED_HOSTS = ['192.168.1.8']
+#ALLOWED_HOSTS = ['192.168.1.8']
 
 
 # Application definition
@@ -101,7 +101,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'ProyectoWeb',
         'USER': 'postgres',
-        'PASSWORD': 'bvh20041',
+        'PASSWORD': '2x4x6x8x10',
         'HOST': 'localhost',
         'PORT': '5432'
     }
