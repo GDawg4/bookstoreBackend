@@ -11,5 +11,5 @@ class InformationSerializer(serializers.ModelSerializer):
         fields = (
             'title',
             'content',
-            'books_mentioned'
+            'book_mentioned'
         )

@@ -56,3 +56,5 @@ class BookViewSet(viewsets.ModelViewSet):
             return Response(status=status.HTTP_204_NO_CONTENT)
         serialized = BooksSerializer(books, many=True)
         return Response(serialized.data)
+
+
