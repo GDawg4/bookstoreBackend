@@ -56,12 +56,3 @@ class AuthorViewSet(viewsets.ModelViewSet):
         books = Book.objects.all().filter(author=pk)
         serialized = BooksSerializer(books, many=True)
         return Response(serialized.data)
-
-    @action(detail=True, methods=['get'], url_path='books-owned-author')
-    def books_owned(self, request, pk=None):
-        user = self.request.user
-        books = Book.objects.all().filter(Q(author=pk), Q(bought_by=user)).distinct()
-        if len(books) == 0:
-            return Response(status=status.HTTP_204_NO_CONTENT)
-        serialized = BooksSerializer(books, many=True)
-        return Response(serialized.data)

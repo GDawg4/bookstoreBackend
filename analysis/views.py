@@ -11,9 +11,3 @@ class AnalysisViewSet(viewsets.ModelViewSet):
     queryset = Analysis.objects.all()
     serializer_class = AnalysisSerializer
 
-    @action(detail=True, url_path='own_analysis', methods=['get'])
-    def own_analysis(self, request, pk=None):
-        user = self.request.user
-        analysis = Analysis.objects.all().filter(Q(book=pk), Q(writer=user))
-        serialized = AnalysisSerializer(analysis, many=True)
-        return Response(serialized.data)

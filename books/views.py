@@ -37,22 +37,6 @@ class BookViewSet(viewsets.ModelViewSet):
         ),
     )
 
-    #Only if owns Book
-    @action(detail=True, url_path='take-note', methods=['post'])
-    def take_note(self, request, pk=None):
-        user = self.request.user
-        title = request.data.get('title')
-        content = request.data.get('content')
-        Note.objects.create(title=title, content=content, book=Book.objects.get(id = pk), user=user)
-        return Response(status=status.HTTP_200_OK)
-
-    @action(detail=True, url_path='see-notes', methods=['get'])
-    def see_notes(self, request, pk=None):
-        user = self.request.user
-        own_notes = Note.objects.all().filter(Q(user=user), Q(book=pk))
-        serialized = NoteSerializer
-        return Response(serialized.data)
-
     @action(detail=True, url_path='all-analysis', methods=['get'])
     def all_analysis(self, request, pk=None):
         analysis = Analysis.objects.all().filter(Q(book=pk))
