@@ -57,7 +57,7 @@ class AuthorViewSet(viewsets.ModelViewSet):
         serialized = BooksSerializer(books, many=True)
         return Response(serialized.data)
 
-    @action(detail=True, methods=['get'], url_path='books-owned')
+    @action(detail=True, methods=['get'], url_path='books-owned-author')
     def books_owned(self, request, pk=None):
         user = self.request.user
         books = Book.objects.all().filter(Q(author=pk), Q(bought_by=user)).distinct()

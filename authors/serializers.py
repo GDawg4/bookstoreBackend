@@ -5,7 +5,6 @@ from authors.models import Author
 
 class AuthorSerializer(serializers.ModelSerializer):
     has_account = serializers.SerializerMethodField()
-    books_written = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
 
     class Meta:
         model = Author

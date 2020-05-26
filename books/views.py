@@ -19,6 +19,23 @@ from analysis.serializers import AnalysisSerializer
 class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all()
     serializer_class = BooksSerializer
+    permission_classes = (
+        APIPermissionClassFactory(
+            name='BookPermission',
+            permission_configuration={
+                'base': {
+                    'create': True,
+                    'list': True,
+                },
+                'instance': {
+                    'retrieve': False,
+                    'destroy': False,
+                    'update': True,
+                    'partial_update': 'pets.change_pet'
+                }
+            }
+        ),
+    )
 
     #Only if owns Book
     @action(detail=True, url_path='take-note', methods=['post'])

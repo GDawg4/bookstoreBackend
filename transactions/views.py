@@ -14,7 +14,6 @@ from users.models import Reader
 def vibeCheck(user, obj, request):
     return False
 
-
 class TransactionViewSet(viewsets.ModelViewSet):
     queryset = Transaction.objects.all()
     serializer_class = TransactionSerializer
