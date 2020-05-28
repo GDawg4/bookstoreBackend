@@ -19,8 +19,12 @@ from analysis.models import Analysis
 from analysis.serializers import AnalysisSerializer
 
 
-def test(user, obj, request):
-    return 2>1
+def is_self(user, obj, request):
+    return user.email == obj.email
+
+
+def vibe_check(user, obj, request):
+    return False
 
 
 class ReaderViewSet(viewsets.ModelViewSet):
@@ -35,12 +39,12 @@ class ReaderViewSet(viewsets.ModelViewSet):
                     'list': False,
                 },
                 'instance': {
-                    'retrieve': test,
+                    'retrieve': is_self,
                     'destroy': False,
                     'update': True,
                     'books_owned': True,
                     'all_transactions': True,
-                    'buy': test
+                    'buy': True
                 }
             }
         ),
@@ -60,10 +64,8 @@ class ReaderViewSet(viewsets.ModelViewSet):
         content = request.data.get('book')
         print(user)
         for i in content:
-            for key, value in i.items():
-                book = get_object_or_404(Book, id=key)
-                total = book.price * int(value)
-                Transaction.objects.create(buyer=user, book=book, total=total, given_to=user)
+            book = get_object_or_404(Book, id=i)
+            Transaction.objects.create(buyer=user, book=book, total=book.price, given_to=user)
         return Response(status=status.HTTP_200_OK)
 
     @action(detail=True, methods=['POST'], url_path='gift')

@@ -25,7 +25,7 @@ class AuthorViewSet(viewsets.ModelViewSet):
             name='AuthorsPermission',
             permission_configuration={
                 'base': {
-                    'create': False,
+                    'create': True,
                     'list': True,
                 },
                 'instance': {
