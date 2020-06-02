@@ -12,8 +12,10 @@ class AuthorSerializer(serializers.ModelSerializer):
             'id',
             'name',
             'birth_date',
+            'bio',
             'has_account',
             'account_linked',
+            'author_pic',
             'books_written'
         )
 

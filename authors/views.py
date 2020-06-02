@@ -34,7 +34,7 @@ class AuthorViewSet(viewsets.ModelViewSet):
                     'update': False,
                     'partial_update': False,
                     'contact': is_valid,
-                    'books':is_valid
+                    'books': True
                 }
             }
         ),
@@ -51,7 +51,7 @@ class AuthorViewSet(viewsets.ModelViewSet):
             return Response(status=status.HTTP_204_NO_CONTENT)
         return Response({'contact': response})
 
-    @action(detail=True, methods=['post'], url_path='books')
+    @action(detail=True, methods=['get'], url_path='books')
     def books(self, request, pk=None):
         books = Book.objects.all().filter(author=pk)
         serialized = BooksSerializer(books, many=True)

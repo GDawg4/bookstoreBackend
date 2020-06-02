@@ -9,4 +9,7 @@ class TagSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Tag
-        fields = ['title']
+        fields = [
+            'id',
+            'title'
+        ]

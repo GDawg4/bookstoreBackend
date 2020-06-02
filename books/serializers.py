@@ -22,6 +22,7 @@ class BooksSerializer(serializers.ModelSerializer):
             'publisher',
             'tags',
             'price',
+            'cover_pic',
             'reviews_starred',
             'analysis_starred',
             'info_mentions'

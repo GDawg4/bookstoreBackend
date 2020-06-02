@@ -15,7 +15,9 @@ import datetime
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+MEDIA_URL = '/media/'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -26,7 +28,7 @@ SECRET_KEY = 'm7&gw@_d%k4@d14_%v0cyfcas!_h)t&p075gd=mwbjod^ki-ws'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.10', 'localhost']
+ALLOWED_HOSTS = ['192.168.1.10', 'localhost', '192.168.1.8']
 #ALLOWED_HOSTS = ['192.168.1.8']
 
 
@@ -99,9 +101,9 @@ WSGI_APPLICATION = 'bookstoreBackend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ProyectoWeb',
+        'NAME': 'BookStore',
         'USER': 'postgres',
-        'PASSWORD': '2x4x6x8x10',
+        'PASSWORD': 'bvh20041',
         'HOST': 'localhost',
         'PORT': '5432'
     }

@@ -51,8 +51,8 @@ class ReaderViewSet(viewsets.ModelViewSet):
     )
 
     def perform_create(self, serializer):
-        print(self.request.POST.get('email'))
-        user = self.get_object()
+        user = self.request.user
+        print(user)
         reader = serializer.save()
         assign_perm('reader.view_reader', user, reader)
         assign_perm('reader.change_reader', user, reader)

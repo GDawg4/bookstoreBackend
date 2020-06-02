@@ -30,8 +30,8 @@ class BookViewSet(viewsets.ModelViewSet):
                 'instance': {
                     'retrieve': False,
                     'destroy': False,
-                    'update': True,
-                    'partial_update': 'pets.change_pet'
+                    'update': False,
+                    'partial_update': False
                 }
             }
         ),
