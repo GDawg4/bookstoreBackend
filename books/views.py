@@ -30,7 +30,7 @@ class BookViewSet(viewsets.ModelViewSet):
                     'list': True,
                 },
                 'instance': {
-                    'retrieve': False,
+                    'retrieve': True,
                     'destroy': False,
                     'update': False,
                     'partial_update': False,
@@ -40,12 +40,18 @@ class BookViewSet(viewsets.ModelViewSet):
         ),
     )
 
-    @action(detail=True, url_path='all-analysis', methods=['get'])
-    def all_analysis(self, request, pk=None):
+    @action(detail=True, url_path='analysis', methods=['get'])
+    def analysis(self, request, pk=None):
         analysis = Analysis.objects.all().filter(Q(book=pk))
         serialized = AnalysisSerializer(analysis, many=True)
         return Response(serialized.data)
     
+    @action(detail=True, url_path='reviews', methods=['get'])
+    def reviews(self, request, pk=None):
+        reviews = Review.objects.all().filter(Q(book=pk))
+        serialized = ReviewSerializer(reviews, many=True)
+        return Response(serialized.data)
+
     @action(detail=True, url_path='reviews', methods=['get'])
     def reviews(self, request, pk=None):
         reviews = Review.objects.all().filter(Q(book=pk))
@@ -66,5 +72,3 @@ class BookViewSet(viewsets.ModelViewSet):
             return Response(status=status.HTTP_204_NO_CONTENT)
         serialized = BooksSerializer(books, many=True)
         return Response(serialized.data)
-
-

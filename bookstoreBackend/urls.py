@@ -21,6 +21,7 @@ from series.views import SeriesViewSet
 from tags.views import TagViewSet
 from transactions.views import TransactionViewSet
 from users.views import ReaderViewSet
+from cart.views import CartViewSet
 
 router = routers.DefaultRouter()
 router.register(r'analysis', AnalysisViewSet)
@@ -34,6 +35,7 @@ router.register(r'series', SeriesViewSet)
 router.register(r'tag', TagViewSet)
 router.register(r'transaction', TransactionViewSet)
 router.register(r'reader', ReaderViewSet)
+router.register(r'cart', CartViewSet)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),

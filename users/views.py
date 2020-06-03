@@ -17,6 +17,8 @@ from notes.models import Note
 from notes.serializers import NoteSerializer
 from analysis.models import Analysis
 from analysis.serializers import AnalysisSerializer
+from cart.models import Cart
+from cart.serializers import CartSerializer
 
 
 def is_self(user, obj, request):
@@ -36,7 +38,7 @@ class ReaderViewSet(viewsets.ModelViewSet):
             permission_configuration={
                 'base': {
                     'create': True,
-                    'list': False,
+                    'list': True,
                 },
                 'instance': {
                     'retrieve': is_self,
@@ -44,7 +46,13 @@ class ReaderViewSet(viewsets.ModelViewSet):
                     'update': True,
                     'books_owned': True,
                     'all_transactions': True,
-                    'buy': True
+                    'buy': True,
+                    'exists':True,
+                    'gift':True,
+                    'see_notes':True,
+                    'cart':True,
+                    'delete_from_cart':True,
+                    'clear_cart':True
                 }
             }
         ),
@@ -62,7 +70,7 @@ class ReaderViewSet(viewsets.ModelViewSet):
     def buy(self, request, pk=None):
         user = self.get_object()
         content = request.data.get('book')
-        print(user)
+        print(content)
         for i in content:
             book = get_object_or_404(Book, id=i)
             Transaction.objects.create(buyer=user, book=book, total=book.price, given_to=user)
@@ -71,13 +79,12 @@ class ReaderViewSet(viewsets.ModelViewSet):
     @action(detail=True, methods=['POST'], url_path='gift')
     def gift(self, request, pk=None):
         user = self.get_object()
-        user_to_gift = get_object_or_404(Reader, username=user)
         content = request.data.get('books')
+        user_name_to_gift = request.data.get('username')
+        user_to_gift = get_object_or_404(Reader, username=user_name_to_gift)
         for i in content:
-            for key, value in i.items():
-                book = Book.objects.get(id=key)
-                total = book.price * int(value)
-                new_transaction = Transaction.objects.create(buyer=user, book=book, total=total, given_to=user_to_gift)
+            book = get_object_or_404(Book, id=i)
+            Transaction.objects.create(buyer=user, book=book, total=book.price, given_to=user_to_gift)
         return Response(status=status.HTTP_200_OK)
 
     @action(detail=True, url_path='books-owned', methods=['get'])
@@ -127,12 +134,12 @@ class ReaderViewSet(viewsets.ModelViewSet):
         serialized = AnalysisSerializer(analysis, many=True)
         return Response(serialized.data)
 
-    @action(detail=True, url_path='see-notes', methods=['get'])
+    @action(detail=True, url_path='see-notes', methods=['post'])
     def see_notes(self, request, pk=None):
         user = self.get_object()
         book = request.data.get('book')
         own_notes = Note.objects.all().filter(Q(user=user), Q(book=book))
-        serialized = NoteSerializer
+        serialized = NoteSerializer(own_notes, many=True)
         return Response(serialized.data)
 
     @action(detail=True, methods=['get'], url_path='books-owned-author')
@@ -144,3 +151,29 @@ class ReaderViewSet(viewsets.ModelViewSet):
             return Response(status=status.HTTP_204_NO_CONTENT)
         serialized = BooksSerializer(books, many=True)
         return Response(serialized.data)
+
+    @action(detail=False, methods=['post'], url_path='exists')
+    def exists(self, request, pk=None):
+        user_name = request.data.get('userToCheck')
+        user = get_object_or_404(Reader, username=user_name)
+        return Response(status=status.HTTP_200_OK)
+
+    @action(detail=True, methods=['get'], url_path='cart')
+    def cart(self, request, pk=None):
+        user = self.get_object()
+        books = Cart.objects.all().filter(Q(user=user))
+        serialized = CartSerializer(books, many=True)
+        return Response(serialized.data)
+
+    @action(detail=True, methods=['post'], url_path='delete-from-cart')
+    def delete_from_cart(self, request, pk=None):
+        user = self.get_object()
+        book = request.data.get('book')
+        Cart.objects.filter(Q(book=book), Q(user=user))
+        return Response(status=status.HTTP_200_OK)
+
+    @action(detail=True, methods=['get'], url_path='clear-cart')
+    def clear_cart(self, request, pk=None):
+        user = self.get_object()
+        Cart.objects.filter(Q(user=user)).delete()
+        return Response(status=status.HTTP_200_OK)

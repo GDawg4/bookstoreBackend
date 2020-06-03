@@ -12,7 +12,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import datetime
-
+import dj_database_url
+import django_heroku
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -58,7 +59,8 @@ INSTALLED_APPS = [
     'series.apps.SeriesConfig',
     'tags.apps.TagsConfig',
     'transactions.apps.TransactionsConfig',
-    'users.apps.UsersConfig'
+    'users.apps.UsersConfig',
+    'cart.apps.CartConfig'
 ]
 
 MIDDLEWARE = [
@@ -108,6 +110,7 @@ DATABASES = {
         'PORT': '5432'
     }
 }
+
 
 
 # Password validation
@@ -168,4 +171,3 @@ AUTHENTICATION_BACKENDS = (
 )
 
 CORS_ORIGIN_ALLOW_ALL = True
-

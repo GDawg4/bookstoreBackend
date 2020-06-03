@@ -11,6 +11,7 @@ class BooksSerializer(serializers.ModelSerializer):
     reviews_starred = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
     analysis_starred = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
     info_mentions = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    author = serializers.StringRelatedField()
 
     class Meta:
         model = Book
