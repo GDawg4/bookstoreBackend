@@ -1,6 +1,9 @@
 from django.conf.urls import url, include
 from django.contrib import admin
 
+from django.conf import settings
+from django.views.static import serve
+
 from rest_framework import routers
 from rest_framework_jwt.views import (
     obtain_jwt_token,
@@ -40,3 +43,8 @@ urlpatterns = [
     url(r'^api/v1/token-auth/', obtain_jwt_token),
     url(r'^api/v1/token-refresh/', refresh_jwt_token),
 ]
+
+if settings.DEBUG:
+    urlpatterns += [
+        url(r'^media/(?P<path>.*)$', serve, { 'document_root' : settings.MEDIA_ROOT, }),
+    ]

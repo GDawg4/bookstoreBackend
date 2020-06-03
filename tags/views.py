@@ -18,8 +18,8 @@ class TagViewSet(viewsets.ModelViewSet):
                 'instance': {
                     'retrieve': True,
                     'destroy': False,
-                    'update': False,
-                    'partial_update': False
+                    'update': True,
+                    'partial_update': 'tag.change_tag'
                 }
             }
         ),

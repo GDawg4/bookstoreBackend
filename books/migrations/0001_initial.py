@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=100, null=True)),
                 ('pub_date', models.DateField()),
-                ('author', models.ForeignKey(default='Anon', on_delete=models.SET('NO AUTHOR'), related_name='books_written', to='authors.Author')),
+                ('author', models.ForeignKey(default=0, on_delete=models.SET('NO AUTHOR'), related_name='books_written', to='authors.Author')),
                 ('publisher', models.ForeignKey(on_delete=models.SET('NO PUBLISHER'), related_name='books_published', to='publishers.Publisher')),
                 ('tags', models.ManyToManyField(null=True, related_name='books', to='tags.Tag')),
             ],

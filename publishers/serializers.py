@@ -12,5 +12,9 @@ class PublisherSerializer(serializers.ModelSerializer):
             'id',
             'name',
             'city',
+            'country',
+            'website',
+            'contact',
+            'publisher_pic',
             'books_published'
         )
