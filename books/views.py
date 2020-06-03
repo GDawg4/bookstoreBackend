@@ -14,7 +14,8 @@ from notes.models import Note
 from notes.serializers import NoteSerializer
 from analysis.models import Analysis
 from analysis.serializers import AnalysisSerializer
-
+from reviews.models import Review
+from reviews.serializers import ReviewSerializer
 
 class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all()
@@ -28,19 +29,26 @@ class BookViewSet(viewsets.ModelViewSet):
                     'list': True,
                 },
                 'instance': {
-                    'retrieve': False,
+                    'retrieve': True,
                     'destroy': False,
                     'update': True,
-                    'partial_update': 'pets.change_pet'
+                    'partial_update': 'pets.change_pet',
+                    'reviews': True
                 }
             }
         ),
     )
 
-    @action(detail=True, url_path='all-analysis', methods=['get'])
-    def all_analysis(self, request, pk=None):
+    @action(detail=True, url_path='analysis', methods=['get'])
+    def analysis(self, request, pk=None):
         analysis = Analysis.objects.all().filter(Q(book=pk))
         serialized = AnalysisSerializer(analysis, many=True)
+        return Response(serialized.data)
+
+    @action(detail=True, url_path='reviews', methods=['get'])
+    def reviews(self, request, pk=None):
+        reviews = Review.objects.all().filter(Q(book=pk))
+        serialized = ReviewSerializer(reviews, many=True)
         return Response(serialized.data)
 
     @action(detail=False, url_path='book-time', methods=['post'])

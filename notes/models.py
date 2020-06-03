@@ -16,4 +16,6 @@ class Note(models.Model):
         null=False,
         on_delete=models.CASCADE
     )
+    color = models.CharField(max_length=10, null=False)
+    date = models.DateField(auto_now=True)
 

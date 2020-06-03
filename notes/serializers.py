@@ -13,5 +13,6 @@ class NoteSerializer(serializers.ModelSerializer):
             'title',
             'content',
             'user',
-            'book'
+            'book',
+            'color'
         )

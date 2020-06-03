@@ -13,10 +13,6 @@ from authors.serializers import AuthorSerializer
 from books.serializers import BooksSerializer
 # Create your views here.
 
-
-def is_valid(user, obj, request):
-    return False
-
 class AuthorViewSet(viewsets.ModelViewSet):
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
@@ -33,8 +29,8 @@ class AuthorViewSet(viewsets.ModelViewSet):
                     'destroy': False,
                     'update': False,
                     'partial_update': False,
-                    'contact': is_valid,
-                    'books':is_valid
+                    'contact': True,
+                    'books':True
                 }
             }
         ),
