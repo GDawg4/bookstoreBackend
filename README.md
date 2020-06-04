@@ -24,6 +24,3 @@ $ python manage.py runscript setup
 ```bash
 $ python manage.py runserver 192.168.1.8:8000
 ```
-
-## NOTA
-La dirección 192.168.1.8 es nuestra dirección IPv4, en caso fuese diferente, correr con la IPv4 propia.
