@@ -88,7 +88,7 @@ class ReaderViewSet(viewsets.ModelViewSet):
             Transaction.objects.create(buyer=user, book=book, total=book.price, given_to=user_to_gift)
         return Response(status=status.HTTP_200_OK)
 
-    @action(detail=True, url_path='books-owned', methods=['get'])
+    @action(detail=True, url_path='owned', methods=['get'])
     def books_owned(self, request, pk=None):
         user = self.get_object()
         books = Book.objects.all().filter(Q(bought_by=user)).distinct()
