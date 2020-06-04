@@ -1,10 +1,10 @@
 # Book Store - Backend
 
-##Requsitos
+## Requsitos
 Tener instalado Django y Python
 Tener un ambiene virtual creado
 
-##Pasos para levantar el servidor
+## Pasos para levantar el servidor
 1. Activar el ambiente virtual
 2. Navegar hacia el directorio del backend
 3. Instalar los requirements
@@ -25,5 +25,5 @@ $ python manage.py runscript setup
 $ python manage.py runserver 192.168.1.8:8000
 ```
 
-##NOTA
+## NOTA
 La dirección 192.168.1.8 es nuestra dirección IP4, en caso fuese diferente, correr con la IP4 propia.
