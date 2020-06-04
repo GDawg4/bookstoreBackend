@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from books.models import Book
+from authors.models import Author
 
 from analysis.serializers import AnalysisSerializer
 from information.serializers import InformationSerializer
@@ -11,7 +12,10 @@ class BooksSerializer(serializers.ModelSerializer):
     reviews_starred = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
     analysis_starred = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
     info_mentions = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
-    author = serializers.StringRelatedField()
+    author = serializers.SlugRelatedField(
+        queryset=Author.objects.all(),
+        slug_field='name',
+    )
 
     class Meta:
         model = Book

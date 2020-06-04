@@ -7,7 +7,7 @@ class Author(models.Model):
     birth_date = models.DateField()
     author_pic = models.ImageField(upload_to="authors/%Y/%m", null = True, blank = True)
     has_account = models.BooleanField(default=False)
-    bio = models.CharField(max_length=200, null=True, blank=True)
+    bio = models.CharField(max_length=250, null=True, blank=True)
     contact = models.CharField(max_length=100, null=True)
     account_linked = models.OneToOneField(
         'users.Reader',

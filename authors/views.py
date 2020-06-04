@@ -30,7 +30,7 @@ class AuthorViewSet(viewsets.ModelViewSet):
                     'update': False,
                     'partial_update': False,
                     'contact': True,
-                    'books':True
+                    'books': True
                 }
             }
         ),
