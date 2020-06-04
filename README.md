@@ -8,6 +8,9 @@ Tener un ambiene virtual creado
 1. Activar el ambiente virtual
 2. Navegar hacia el directorio del backend
 3. Instalar los requirements
+```bash
+$ pip instll -r requirements.txt
+```
 4. Hacer las migraciones (en caso no estén hechas), ejecutar 
 ```bash
 $ python manage.py makemigrations
