@@ -43,16 +43,17 @@ class ReaderViewSet(viewsets.ModelViewSet):
                 'instance': {
                     'retrieve': is_self,
                     'destroy': False,
-                    'update': True,
+                    'update': False,
                     'books_owned': True,
                     'all_transactions': True,
                     'buy': True,
-                    'exists':True,
-                    'gift':True,
-                    'see_notes':True,
-                    'cart':True,
-                    'delete_from_cart':True,
-                    'clear_cart':True
+                    'exists': True,
+                    'gift': True,
+                    'see_notes': True,
+                    'cart': True,
+                    'delete_from_cart': True,
+                    'clear_cart': True,
+                    'own_transactions': True,
                 }
             }
         ),
@@ -143,7 +144,7 @@ class ReaderViewSet(viewsets.ModelViewSet):
         return Response(serialized.data)
 
     @action(detail=True, methods=['get'], url_path='books-owned-author')
-    def books_owned(self, request, pk=None):
+    def books_owned_author(self, request, pk=None):
         user = self.get_object()
         author=request.data.get('author')
         books = Book.objects.all().filter(Q(author=author), Q(bought_by=user)).distinct()
@@ -169,7 +170,7 @@ class ReaderViewSet(viewsets.ModelViewSet):
     def delete_from_cart(self, request, pk=None):
         user = self.get_object()
         book = request.data.get('book')
-        Cart.objects.filter(Q(book=book), Q(user=user))
+        Cart.objects.filter(Q(book=book), Q(user=user)).delete()
         return Response(status=status.HTTP_200_OK)
 
     @action(detail=True, methods=['get'], url_path='clear-cart')

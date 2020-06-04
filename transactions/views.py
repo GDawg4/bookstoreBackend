@@ -25,7 +25,7 @@ class TransactionViewSet(viewsets.ModelViewSet):
             permission_configuration={
                 'base': {
                     'create': True,
-                    'list': False,
+                    'list': True,
                 },
                 'instance': {
                     'retrieve': False,
