@@ -26,9 +26,3 @@ class ReviewViewSet(viewsets.ModelViewSet):
             }
         ),
     )
-
-    def perform_create(self, serializer):
-        review = serializer.save()
-        user = self.request.user
-        assign_perm('carts.delete_cart', user, review)
-        return Response(serializer.data)
