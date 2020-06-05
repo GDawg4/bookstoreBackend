@@ -1,8 +1,8 @@
 # Book Store - Backend
 
 ## Requsitos
-Tener instalado Django y Python
-Tener un ambiene virtual creado
+1. Tener instalado Django y Python
+2. Tener un ambiene virtual creado
 
 ## Pasos para levantar el servidor
 1. Activar el ambiente virtual
