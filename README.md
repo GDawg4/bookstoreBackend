@@ -29,4 +29,4 @@ $ python manage.py runserver 192.168.1.8:8000
 ```
 
 ## NOTA 
-En caso la dirección IPv4 propia fuese otra, correr con la IPv4 propia en lugar ed 192.168.1.8
+En caso la dirección IPv4 propia fuese otra, correr con la IPv4 propia en lugar de 192.168.1.8
