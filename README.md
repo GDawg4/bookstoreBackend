@@ -11,7 +11,7 @@ Tener un ambiene virtual creado
 ```bash
 $ pip install -r requirements.txt
 ```
-4. Hacer las migraciones (en caso no estén hechas), ejecutar 
+4. Hacer las migraciones necesarias, ejecutar 
 ```bash
 $ python manage.py makemigrations
 ```
